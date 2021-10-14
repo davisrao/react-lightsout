@@ -31,7 +31,7 @@ import { lightCell } from "./helpers";
  *
  **/
 
-function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = .5 }) {
+function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) {
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
@@ -95,18 +95,20 @@ function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = .5 }) {
           You have Won!
         </div>}
       {!won &&
-        <table>{board.map((row, y) => {
+        <table><tbody>{board.map((row, y) => {
           return (
             <tr>
               {row.map((cell, x) => {
                 return (
                   <Cell
+                    key={`${y}-${x}`}
                     isLit={cell}
                     flipCellsAroundMe={()=>flipCellsAround(`${y}-${x}`)}
                   />)
               })}
             </tr>)
         })}
+        </tbody>
         </table>
       }
     </div>
