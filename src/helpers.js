@@ -1,10 +1,6 @@
 
 function lightCell(prob){
-    if(Math.random() < prob){
-      return "t"
-    }else{
-      return "f"
-    }
+    return Math.random() < prob
   };
 
   export {lightCell};
