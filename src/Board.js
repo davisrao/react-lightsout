@@ -31,7 +31,7 @@ import { lightCell } from "./helpers";
  *
  **/
 
-function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) {
+function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.75 }) {
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
@@ -72,7 +72,8 @@ function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) {
       };
 
       // TODO: Make a (deep) copy of the oldBoard
-      let boardCopy = [...oldBoard];
+      // let boardCopy = [...oldBoard];
+      let boardCopy = oldBoard.map( row => [...row] );
 
       // TODO: in the copy, flip this cell and the cells around it
       flipCell(y, x, boardCopy);
@@ -95,7 +96,8 @@ function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) {
           You have Won!
         </div>}
       {!won &&
-        <table><tbody>{board.map((row, y) => {
+        <table>
+        <tbody>{board.map((row, y) => {
           return (
             <tr>
               {row.map((cell, x) => {
